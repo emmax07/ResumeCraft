@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginSignup.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,8 @@ const Login = () => {
 
       // Save login status in localStorage
       localStorage.setItem("isLoggedIn", "true");
+
+      navigate("/resume_templates");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed"); // Handle errors
     }
