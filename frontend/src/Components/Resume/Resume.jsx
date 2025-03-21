@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ResumeFormHandler from "./ResumeFormHandler";
-import "./Resume.css";
 import Navbar from "../Navbar/Navbar";
+import PropTypes from "prop-types";
+import "./Resume.css";
 
-const Resume = () => {
-  const { id } = useParams();
+const Resume = ({ title, navigateTo }) => {
+  // Accept the title and navigateTo prop
   const navigate = useNavigate();
-
   const {
     formData,
     handleChange,
@@ -17,11 +17,19 @@ const Resume = () => {
   } = ResumeFormHandler();
 
   const [error, setError] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!formData.fullName || !formData.email) {
+      setError("Full Name and Email are required!");
+      return;
+    }
+
     setError("");
-    navigate("/resume_preview3", { state: { resume: formData } });
+
+    // Use the navigateTo prop to navigate to the correct route
+    navigate(navigateTo, { state: { resume: formData } });
   };
 
   return (
@@ -29,7 +37,7 @@ const Resume = () => {
       <Navbar />
       <div className="main-container">
         <div className="resume-container">
-          <h1>Resume Template {id}</h1>
+          <h1>{title}</h1>
           {error && <p className="error">{error}</p>}
 
           <form onSubmit={handleSubmit}>
@@ -320,6 +328,12 @@ const Resume = () => {
       </div>
     </div>
   );
+};
+
+// Prop validation using PropTypes
+Resume.propTypes = {
+  title: PropTypes.string.isRequired,
+  navigateTo: PropTypes.string.isRequired,
 };
 
 export default Resume;
