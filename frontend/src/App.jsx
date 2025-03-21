@@ -5,6 +5,12 @@ import Signup from "./Components/LoginSignup/Signup.jsx";
 import Logout from "./Components/LoginSignup/Logout.jsx";
 import Cards from "./Components/Cards/Cards.jsx";
 import Resume from "./Components/Resume/Resume.jsx";
+import ResumePreview1 from "./Components/ResumePreview/ResumePreview1.jsx";
+import ResumePreview2 from "./Components/ResumePreview/ResumePreview2.jsx";
+import ResumePreview3 from "./Components/ResumePreview/ResumePreview3.jsx";
+import ResumePreview4 from "./Components/ResumePreview/ResumePreview4.jsx";
+import ResumePreview5 from "./Components/ResumePreview/ResumePreview5.jsx";
+import ResumePreview6 from "./Components/ResumePreview/ResumePreview6.jsx";
 import Home from "./Pages/Home.jsx";
 
 function App() {
@@ -22,6 +28,12 @@ function App() {
         <Route path="/resume4" element={<Resume />} />
         <Route path="/resume5" element={<Resume />} />
         <Route path="/resume6" element={<Resume />} />
+        <Route path="/resume_preview1" element={<ResumePreview1 />} />
+        <Route path="/resume_preview2" element={<ResumePreview2 />} />
+        <Route path="/resume_preview3" element={<ResumePreview3 />} />
+        <Route path="/resume_preview4" element={<ResumePreview4 />} />
+        <Route path="/resume_preview5" element={<ResumePreview5 />} />
+        <Route path="/resume_preview6" element={<ResumePreview6 />} />
       </Routes>
     </Router>
   );
