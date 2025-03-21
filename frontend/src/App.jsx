@@ -7,6 +7,9 @@ import Cards from "./Components/Cards/Cards.jsx";
 import Resume1 from "./Components/Resume/ResumeTemplate1.jsx";
 import Resume2 from "./Components/Resume/ResumeTemplate2.jsx";
 import Resume3 from "./Components/Resume/ResumeTemplate3.jsx";
+import Resume4 from "./Components/Resume/ResumeTemplate4.jsx";
+import Resume5 from "./Components/Resume/ResumeTemplate5.jsx";
+import Resume6 from "./Components/Resume/ResumeTemplate6.jsx";
 import ResumePreview1 from "./Components/ResumePreview/ResumePreview1.jsx";
 import ResumePreview2 from "./Components/ResumePreview/ResumePreview2.jsx";
 import ResumePreview3 from "./Components/ResumePreview/ResumePreview3.jsx";
@@ -27,6 +30,9 @@ function App() {
         <Route path="/resume1" element={<Resume1 />} />
         <Route path="/resume2" element={<Resume2 />} />
         <Route path="/resume3" element={<Resume3 />} />
+        <Route path="/resume4" element={<Resume4 />} />
+        <Route path="/resume5" element={<Resume5 />} />
+        <Route path="/resume6" element={<Resume6 />} />
         <Route path="/resume_preview1" element={<ResumePreview1 />} />
         <Route path="/resume_preview2" element={<ResumePreview2 />} />
         <Route path="/resume_preview3" element={<ResumePreview3 />} />
