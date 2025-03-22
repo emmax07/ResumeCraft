@@ -1,20 +1,13 @@
 /* Card container styling */
 .card-container {
   display: grid;
-<<<<<<< HEAD
-  grid-template-columns: repeat(6, 1fr);
-=======
   grid-template-columns: repeat(3, 1fr);
->>>>>>> main
   gap: 20px;
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
   margin-top: 5%;
-<<<<<<< HEAD
-=======
   margin-bottom: 5%;
->>>>>>> main
 }
 
 .card {
