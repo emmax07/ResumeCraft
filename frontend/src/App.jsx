@@ -17,6 +17,8 @@ import ResumePreview4 from "./Components/ResumePreview/ResumePreview4.jsx";
 import ResumePreview5 from "./Components/ResumePreview/ResumePreview5.jsx";
 import ResumePreview6 from "./Components/ResumePreview/ResumePreview6.jsx";
 import Home from "./Pages/Home.jsx";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard.jsx";
+import UsersDashboard from "./Components/UsersDashboard.jsx/UsersDashboard.jsx";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/users_dashboard" element={<UsersDashboard />} />
+        <Route path="/admin_dashboard" element={<AdminDashboard />} />
         <Route path="/resume_templates" element={<Cards />} />
         <Route path="/resume1" element={<Resume1 />} />
         <Route path="/resume2" element={<Resume2 />} />
