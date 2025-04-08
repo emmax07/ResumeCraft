@@ -1,49 +1,78 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:5000/api/login", {
         email,
         password,
       });
 
-      alert(response.data.message); // Display success message
+      console.log(response);
+      alert(response.data.message);
 
-      // Save login status in localStorage
-      localStorage.setItem("isLoggedIn", "true");
+      const { token } = response.data;
+      localStorage.setItem("token", token);
 
-      navigate("/resume_templates");
+      // Dispatch event to notify Navbar of login
+      window.dispatchEvent(new Event("storage"));
+
+      const userResponse = await axios.get(
+        "http://localhost:5000/api/user/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (userResponse.data.role === "admin") {
+        navigate("/admin_dashboard");
+      } else {
+        navigate("/users_dashboard");
+      }
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed"); // Handle errors
+      console.error("Error during login:", error);
+      setError("Invalid credentials");
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit}>
+    <div className="login-form-container">
+      <h2>Login</h2>
+      {error && <div className="error">{error}</div>}
+      <form onSubmit={handleLogin}>
         <input
           type="email"
-          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
         />
         <input
           type="password"
-          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
         />
         <button type="submit">Login</button>
       </form>
+      <div className="form-link">
+        <span>
+          Don't have an account? <a href="/signup">Sign up</a>
+        </span>
+      </div>
     </div>
   );
 };
