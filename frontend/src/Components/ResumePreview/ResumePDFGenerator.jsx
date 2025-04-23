@@ -3,28 +3,41 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 const ResumePDFGenerator = () => {
-  const generatePDF = useCallback(
-    (elementSelector, fileName = "Resume_Generated") => {
-      const element = document.querySelector(elementSelector);
-      if (!element) {
-        console.error("Element not found:", elementSelector);
-        return;
-      }
+  // Function to generate and download PDF
+  const generatePDF = useCallback((selector, fileName = "Resume_Generated") => {
+    const element = document.querySelector(selector);
+    if (!element) return;
 
-      html2canvas(element, { scale: 2 }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        const imgWidth = 210; // A4 width in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+    // Convert the HTML element into a canvas
+    html2canvas(element, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        pdf.save(`${fileName}.pdf`);
-      });
-    },
-    []
-  );
+      // Add the image to the PDF and save it
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save(`${fileName}.pdf`);
+    });
+  }, []);
 
-  return { generatePDF };
+  // Function to generate PDF as a blob (for saving)
+  const getPDFBlob = useCallback(async (selector) => {
+    const element = document.querySelector(selector);
+    if (!element) return null;
+
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+    return pdf.output("blob");
+  }, []);
+
+  return { generatePDF, getPDFBlob };
 };
 
 export default ResumePDFGenerator;

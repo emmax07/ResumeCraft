@@ -1,18 +1,71 @@
 import { useLocation } from "react-router-dom";
 import ResumePDFGenerator from "./ResumePDFGenerator";
-import "./ResumePreview.css";
 import Navbar from "../Navbar/Navbar";
+import axios from "axios";
 
 const ResumePreview1 = () => {
   const location = useLocation();
   const resumeData = location.state?.resume || {};
+  const { generatePDF, getPDFBlob } = ResumePDFGenerator();
 
-  const { generatePDF } = ResumePDFGenerator();
+  const fileName = `${
+    resumeData.fullName ? resumeData.fullName.replace(/\s+/g, "") : "resume"
+  }_Resume.pdf`;
+
+  const saveResume = async (userEmail) => {
+    const pdfBlob = await getPDFBlob("#resume");
+    if (!pdfBlob) {
+      alert("Resume not generated. Please try again.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", pdfBlob, fileName);
+    formData.append("userEmail", userEmail);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/resumes",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        alert("Resume saved successfully!");
+      } else {
+        alert("Unexpected response from the server.");
+      }
+    } catch (error) {
+      console.error("Error saving resume:", error);
+      alert("Failed to save resume.");
+    }
+  };
+
+  const handleSaveClick = () => {
+    const userEmail = prompt(
+      "Please enter your user email to save the resume:"
+    );
+
+    if (userEmail) {
+      // Validate the email (basic validation)
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(userEmail)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      saveResume(userEmail);
+    } else {
+      alert("Email is required to save the resume.");
+    }
+  };
 
   return (
     <div>
       <Navbar />
-      <div className="resume-view-container">
+      <div id="resume" className="resume-view-container">
         <h1>{resumeData.fullName || "N/A"}</h1>
         <p>
           <strong>Address:</strong> {resumeData.address || "N/A"}
@@ -106,9 +159,15 @@ const ResumePreview1 = () => {
           </div>
         )}
       </div>
-      <button onClick={() => generatePDF(".resume-view-container")}>
-        Download as PDF
-      </button>
+
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={() => generatePDF("#resume", fileName)}>
+          Download as PDF
+        </button>
+        <button onClick={handleSaveClick} style={{ marginLeft: "10px" }}>
+          Save Resume
+        </button>
+      </div>
     </div>
   );
 };

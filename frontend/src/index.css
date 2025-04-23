@@ -1,3 +1,9 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: white;
+  background-image: url("../Components/Assets/BestResume.jpg"); /* Add your image path here */
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
