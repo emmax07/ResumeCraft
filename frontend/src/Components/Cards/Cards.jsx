@@ -28,7 +28,7 @@ const Card = () => {
           <div
             key={card.id}
             className="card"
-            onClick={() => navigate(`/resume${card.id}`)}
+            onClick={() => navigate(`/resume/${card.id}`)}
           >
             <img src={card.image} alt={`Resume ${card.id}`} />
             <h3>Resume {card.id}</h3>

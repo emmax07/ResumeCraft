@@ -47,6 +47,16 @@ const Login = () => {
     }
   };
 
+  const handleForgotPassword = () => {
+    // Redirect to forgot password page
+    navigate("/forgot-password");
+  };
+
+  const handleResetPassword = () => {
+    // Redirect to reset password page
+    navigate("/reset-password");
+  };
+
   return (
     <div className="login-form-container">
       <h2>Login</h2>
@@ -68,9 +78,18 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
+
       <div className="form-link">
         <span>
-          Don't have an account? <a href="/signup">Sign up</a>
+          Do not have an account? <a href="/signup">Sign up</a>
+        </span>
+      </div>
+
+      <div className="forgot-password-link">
+        <span>
+          <a href="#" onClick={handleForgotPassword}>
+            Forgot your password?
+          </a>
         </span>
       </div>
     </div>

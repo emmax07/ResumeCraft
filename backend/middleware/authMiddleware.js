@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
+// Middleware to authenticate user using JWT
 const authenticate = async (req, res, next) => {
   let token = req.headers["authorization"];
 
@@ -37,6 +38,7 @@ const authenticate = async (req, res, next) => {
   }
 };
 
+// Middleware to check if user is an admin
 const isAdmin = (req, res, next) => {
   if (req.user.role !== "admin") {
     return res
@@ -46,6 +48,7 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
+// Middleware to check if user is a regular user or an admin
 const isUser = (req, res, next) => {
   if (req.user.role !== "user" && req.user.role !== "admin") {
     return res

@@ -4,117 +4,123 @@ body {
   background-image: url("../Components/Assets/BestResume.jpg"); /* Add your image path here */
 }
 
-/* Home Container */
+/* Home page container styling */
 .home-container {
-  height: 100vh;
-  width: 100%;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: cover;
-  background-position: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Card Style */
-
+/* Home card container */
 .home-card {
-  width: 30%;
-  border-radius: 10%;
-  height: 70vh;
-}
-
-.home-section {
-  padding: 4%;
-  border-radius: 10%;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px;
   width: 100%;
-  height: 100%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.9); /* Light background for card */
+  transform: translateY(-20px);
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
 }
 
+/* Animation for home card to fade in */
+@keyframes fadeInUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Heading styling */
 .home-section h1 {
-  font-size: 1.6rem;
-  margin-top: 20%;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
+/* Emphasized text within h1 */
+.home-section h1 strong {
+  color: #2575fc;
+}
+
+/* Paragraph styling */
 .home-section p {
-  font-size: 1.4rem;
-  margin-bottom: 2%;
-  margin-top: 10%;
-  line-height: 1.5;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
+/* Call-to-action buttons container */
 .cta-buttons {
   display: flex;
-  margin-top: 10%;
   justify-content: center;
-  gap: 5%;
-  margin-bottom: 2%;
+  gap: 20px;
 }
 
+/* Styling for both buttons */
 .cta-button {
-  padding: 1.2% 3%;
   text-decoration: none;
-  border-radius: 3%;
-  font-size: 1.4rem;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: background-color 0.3s ease;
-  border: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
-.login-button,
-.signup-button {
-  background-color: #fff;
-  color: #0099ff;
-  border: 2px solid #0099ff;
-}
-
-.login-button:hover,
-.signup-button:hover {
-  background-color: #0099ff;
+/* Login button styling */
+.login-button {
+  background-color: #2575fc;
   color: white;
+  border: 2px solid transparent;
 }
 
+.login-button:hover {
+  background-color: transparent;
+  border: 2px solid #2575fc;
+  color: #2575fc;
+  transform: translateY(-2px);
+}
+
+/* Sign Up button styling */
+.signup-button {
+  background-color: #e74c3c;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.signup-button:hover {
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  transform: translateY(-2px);
+}
+
+/* Bottom link container */
 .bottom-link {
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 1rem;
+  color: #666;
 }
 
+/* Styling for the 'Log in here' link */
 .bottom-link a {
-  display: inline-block;
-  padding: 10px 20px;
+  color: #2575fc;
+  font-weight: 600;
   text-decoration: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  text-align: center;
-  font-size: 0.9rem;
+  transition: color 0.3s ease;
 }
 
 .bottom-link a:hover {
-  text-decoration: underline;
-  background-color: #0099ff;
-  color: #fff;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .home-section {
-    width: 80%;
-  }
-  .home-section h1 {
-    font-size: 1rem;
-  }
-
-  .home-section p {
-    font-size: 0.8rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
+  color: #1d4db2;
 }
