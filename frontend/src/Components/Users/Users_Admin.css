@@ -37,6 +37,7 @@
 
 /* Admin Dashboard */
 .admin-dashboard {
+  margin: 5%;
   padding: 30px;
   font-family: "Helvetica Neue", Arial, sans-serif;
   background-color: #f4f7fb;
@@ -105,6 +106,7 @@
 
 /* User Dashboard */
 .user-dashboard {
+  margin: 5%;
   padding: 40px;
   background-color: #f8f9fc;
   border-radius: 12px;

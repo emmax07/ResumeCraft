@@ -16,12 +16,20 @@ const ForgotPassword = () => {
         "http://localhost:5000/api/forgot-password",
         { email }
       );
-      setMessage(response.data.message); // assuming the backend returns a success message
-      navigate("/reset-password");
+      setMessage(response.data.message);
       setError("");
+      navigate("/reset-password");
     } catch (error) {
       setMessage("");
-      setError("Failed to send reset link", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("Failed to send reset link. Please try again.");
+      }
     }
   };
 

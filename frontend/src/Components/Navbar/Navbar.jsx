@@ -53,11 +53,10 @@ const Navbar = () => {
     <nav>
       <ul>
         <li className="home-button">
-          <Link to="/">ResumeCraft</Link>
+          <Link to="/">💼 ResumeCraft</Link>
         </li>
       </ul>
 
-      {/* Right-aligned items */}
       <div className="right-items">
         <ul>
           {isLoggedIn && username && (
