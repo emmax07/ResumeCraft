@@ -1,8 +1,11 @@
 /* Container */
 .dashboard-container {
+  max-width: 80%;
+  margin: 50px auto;
   padding: 3rem 4rem;
   background: linear-gradient(to bottom right, #f0f2f5, #e3e7ed);
   min-height: 100vh;
+  border-radius: 16px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }

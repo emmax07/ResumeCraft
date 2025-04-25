@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./Cards.css";
 import Navbar from "../Navbar/Navbar";
 import resume_image1 from "../Assets/Resume1.png";
-import resume_image2 from "../Assets/Resume1.png";
+import resume_image2 from "../Assets/Resume2.png";
 import resume_image3 from "../Assets/Resume1.png";
 import resume_image4 from "../Assets/Resume1.png";
 import resume_image5 from "../Assets/Resume1.png";

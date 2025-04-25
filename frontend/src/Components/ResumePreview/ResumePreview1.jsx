@@ -2,8 +2,9 @@ import { useLocation } from "react-router-dom";
 import ResumePDFGenerator from "./ResumePDFGenerator";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-const ResumePreview1 = () => {
+const ResumePreview1 = ({ userEmail }) => {
   const location = useLocation();
   const resumeData = location.state?.resume || {};
   const { generatePDF, getPDFBlob } = ResumePDFGenerator();
@@ -12,7 +13,7 @@ const ResumePreview1 = () => {
     resumeData.fullName ? resumeData.fullName.replace(/\s+/g, "") : "resume"
   }_Resume.pdf`;
 
-  const saveResume = async (userEmail) => {
+  const saveResume = async (emailToUse) => {
     const pdfBlob = await getPDFBlob("#resume");
     if (!pdfBlob) {
       alert("Resume not generated. Please try again.");
@@ -21,7 +22,8 @@ const ResumePreview1 = () => {
 
     const formData = new FormData();
     formData.append("file", pdfBlob, fileName);
-    formData.append("userEmail", userEmail);
+    formData.append("userEmail", emailToUse);
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/resumes",
@@ -40,26 +42,28 @@ const ResumePreview1 = () => {
       }
     } catch (error) {
       console.error("Error saving resume:", error);
-      alert("Failed to save resume.");
+      alert("Invalid user email provided. Please provide your user email.");
     }
   };
 
   const handleSaveClick = () => {
-    const userEmail = prompt(
-      "Please enter your user email to save the resume:"
-    );
+    let emailToUse = userEmail;
 
-    if (userEmail) {
-      // Validate the email (basic validation)
+    if (!emailToUse) {
+      emailToUse = prompt("Please enter your user email to save the resume:");
+      if (!emailToUse) {
+        alert("Email is required to save the resume.");
+        return;
+      }
+
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (!emailRegex.test(userEmail)) {
+      if (!emailRegex.test(emailToUse)) {
         alert("Please enter a valid email address.");
         return;
       }
-      saveResume(userEmail);
-    } else {
-      alert("Email is required to save the resume.");
     }
+
+    saveResume(emailToUse);
   };
 
   return (
@@ -160,11 +164,14 @@ const ResumePreview1 = () => {
         )}
       </div>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={() => generatePDF("#resume", fileName)}>
+      <div className="resume-button-group">
+        <button
+          className="resume-button"
+          onClick={() => generatePDF("#resume", fileName)}
+        >
           Download as PDF
         </button>
-        <button onClick={handleSaveClick} style={{ marginLeft: "10px" }}>
+        <button className="resume-button" onClick={handleSaveClick}>
           Save Resume
         </button>
       </div>
@@ -173,3 +180,7 @@ const ResumePreview1 = () => {
 };
 
 export default ResumePreview1;
+
+ResumePreview1.propTypes = {
+  userEmail: PropTypes.string,
+};

@@ -28,22 +28,26 @@ const createResume = (req, res) => {
 
 // View Resume: Open the resume in the browser (preview)
 const viewResume = (req, res) => {
-  Resume.findByEmail(req.params.email, (err, resume) => {
+  const resumeId = req.params.id;
+
+  Resume.findById(resumeId, (err, resume) => {
     if (err || !resume)
       return res.status(404).json({ message: "Resume not found" });
 
-    // Set the appropriate headers for PDF
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "inline; filename=" + resume.filename);
-
-    // Send the resume data
+    res.setHeader(
+      "Content-Disposition",
+      `inline; filename="${resume.filename}"`
+    );
     res.send(resume.filedata);
   });
 };
 
 // Download Resume: Download the resume with an attachment header
 const downloadResume = (req, res) => {
-  Resume.findByEmail(req.params.email, (err, resume) => {
+  const resumeId = req.params.id;
+
+  Resume.findById(resumeId, (err, resume) => {
     if (err || !resume)
       return res.status(404).json({ message: "Resume not found" });
 
@@ -52,7 +56,7 @@ const downloadResume = (req, res) => {
       "Content-Disposition",
       `attachment; filename="${resume.filename}"`
     );
-    res.send(resume.filedata); // Send file data for download
+    res.send(resume.filedata);
   });
 };
 

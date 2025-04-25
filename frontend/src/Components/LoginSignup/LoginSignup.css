@@ -66,18 +66,21 @@ button:hover {
 
 /* Form navigation (links) */
 .form-link {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
 }
 
 .form-link a {
   color: #6e7dff;
   text-decoration: none;
-  font-size: 1rem;
 }
 
 .form-link a:hover {
   text-decoration: underline;
+  color: #2c3e8c;
 }
 
 /* Responsive Design: Mobile View */

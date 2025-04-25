@@ -24,7 +24,7 @@ const ResumePreview = () => {
     case "6":
       return <ResumePreview6 />;
     default:
-      return <div>Invalid Resume Preview ID</div>; // Optionally handle invalid cases
+      return <div>Invalid Resume Preview ID</div>;
   }
 };
 
