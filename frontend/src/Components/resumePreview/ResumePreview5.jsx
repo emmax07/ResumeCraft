@@ -1,114 +1,98 @@
+//  ResumePreview5.jsx (Functional Resume)
+
 import { useLocation } from "react-router-dom";
 import ResumePDFGenerator from "./ResumePDFGenerator";
-import "./ResumePreview.css";
+import "./ResumePreview5.css";
 import Navbar from "../Navbar/Navbar";
 
 const ResumePreview5 = () => {
   const location = useLocation();
   const resumeData = location.state?.resume || {};
-
   const { generatePDF } = ResumePDFGenerator();
+
+  const createMarkup = (text) => {
+    return { __html: text.replace(/\n/g, "<br/>") };
+  };
+
+  const renderList = (items) => (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index} dangerouslySetInnerHTML={createMarkup(item)}></li>
+      ))}
+    </ul>
+  );
 
   return (
     <div>
       <Navbar />
-      <div className="resume-view-container">
-        <h1>{resumeData.fullName || "N/A"}</h1>
-        <p>
-          <strong>Address:</strong> {resumeData.address || "N/A"}
-        </p>
-        <p>
-          {resumeData.email || "N/A"}, {resumeData.phone || "N/A"},{" "}
-          {resumeData.linkedin || "N/A"}
-        </p>
-        <p>
-          <strong>Profile Summary:</strong> {resumeData.profileSummary || "N/A"}
-        </p>
-        <p>
-          <strong>Key Skills:</strong> {resumeData.key_skills || "N/A"}
-        </p>
+      <div className="resume-functional-container">
+        <h1 className="name">{resumeData.fullName || "Your Name"}</h1>
+        <p className="title">{resumeData.professional_title || "Your Title"}</p>
 
-        {/* Sections Rendering */}
-        {resumeData.work_experience?.length > 0 && (
-          <div className="content-container">
-            <strong>Work Experience:</strong>
-            {resumeData.work_experience.map((experience, index) => (
-              <p className="new_para" key={index}>
-                {experience}
-              </p>
-            ))}
-          </div>
+        <div className="contact">
+          <p>{resumeData.email} | {resumeData.phone}</p>
+          <p>{resumeData.linkedin} | {resumeData.portfolio}</p>
+          <p>{resumeData.address}</p>
+        </div>
+
+        {resumeData.key_skills && resumeData.key_skills.trim() !== "" && (
+          <section>
+            <h2>Key Skills</h2>
+            {renderList(resumeData.key_skills.split(","))}
+          </section>
         )}
 
-        {resumeData.education?.length > 0 && (
-          <div className="content-container">
-            <strong>Education:</strong>
-            {resumeData.education.map((education, index) => (
-              <p className="new_para" key={index}>
-                {education}
-              </p>
-            ))}
-          </div>
+        {resumeData.certifications && resumeData.certifications.length > 0 && (
+          <section>
+            <h2>Certifications</h2>
+            {renderList(resumeData.certifications)}
+          </section>
         )}
 
-        {resumeData.certifications?.length > 0 && (
-          <div className="content-container">
-            <strong>Certifications:</strong>
-            {resumeData.certifications.map((certification, index) => (
-              <p className="new_para" key={index}>
-                {certification}
-              </p>
-            ))}
-          </div>
+        {resumeData.projects && resumeData.projects.length > 0 && (
+          <section>
+            <h2>Projects</h2>
+            {renderList(resumeData.projects)}
+          </section>
         )}
 
-        {resumeData.projects?.length > 0 && (
-          <div className="content-container">
-            <strong>Projects:</strong>
-            {resumeData.projects.map((project, index) => (
-              <p className="new_para" key={index}>
-                {project}
-              </p>
-            ))}
-          </div>
+        {resumeData.work_experience && resumeData.work_experience.length > 0 && (
+          <section>
+            <h2>Experience</h2>
+            {renderList(resumeData.work_experience)}
+          </section>
         )}
 
-        {resumeData.research_publications?.length > 0 && (
-          <div className="content-container">
-            <strong>Research Publications:</strong>
-            {resumeData.research_publications.map((publication, index) => (
-              <p className="new_para" key={index}>
-                {publication}
-              </p>
-            ))}
-          </div>
+        {resumeData.education && resumeData.education.length > 0 && (
+          <section>
+            <h2>Education</h2>
+            {renderList(resumeData.education)}
+          </section>
         )}
 
-        {resumeData.awards?.length > 0 && (
-          <div className="content-container">
-            <strong>Awards:</strong>
-            {resumeData.awards.map((award, index) => (
-              <p className="new_para" key={index}>
-                {award}
-              </p>
-            ))}
-          </div>
+        {resumeData.research_publications && resumeData.research_publications.length > 0 && (
+          <section>
+            <h2>Research Publications</h2>
+            {renderList(resumeData.research_publications)}
+          </section>
         )}
 
-        {resumeData.professional_membership?.length > 0 && (
-          <div className="content-container">
-            <strong>Professional Membership:</strong>
-            {resumeData.professional_membership.map((membership, index) => (
-              <p className="new_para" key={index}>
-                {membership}
-              </p>
-            ))}
-          </div>
+        {resumeData.awards && resumeData.awards.length > 0 && (
+          <section>
+            <h2>Awards</h2>
+            {renderList(resumeData.awards)}
+          </section>
+        )}
+
+        {resumeData.professional_membership && resumeData.professional_membership.length > 0 && (
+          <section>
+            <h2>Professional Memberships</h2>
+            {renderList(resumeData.professional_membership)}
+          </section>
         )}
       </div>
-      <button onClick={() => generatePDF(".resume-view-container")}>
-        Download as PDF
-      </button>
+
+      <button className="download-btn" onClick={() => generatePDF(".resume-functional-container")}>Download as PDF</button>
     </div>
   );
 };

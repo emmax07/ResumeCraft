@@ -1,0 +1,72 @@
+.resume-creative-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 40px;
+    background: #fff;
+    border: 2px solid #f39c12;
+    border-radius: 15px;
+    font-family: "Fira Sans", sans-serif;
+    color: #2c3e50;
+  }
+  
+  .header {
+    text-align: center;
+    background: #f39c12;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+  }
+  
+  .header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+  }
+  
+  .header h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .sections {
+    margin-top: 30px;
+  }
+  
+  section {
+    margin-top: 30px;
+  }
+  
+  h3 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 5px;
+    color: #e67e22;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  li, p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-align: justify;
+    line-height: 1.5;
+  }
+  
+  button.download-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 24px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  button.download-btn:hover {
+    background-color: #e67e22;
+  }
+  
