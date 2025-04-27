@@ -1,4 +1,4 @@
-// ✅ ResumePreview2.jsx (Classic Chronological Resume) - Updated Conditional Headings
+// ✅ ResumePreview2.jsx (Rebuilt for Professional Look)
 
 import { useLocation } from "react-router-dom";
 import ResumePDFGenerator from "./ResumePDFGenerator";
@@ -26,75 +26,37 @@ const ResumePreview2 = () => {
     <div>
       <Navbar />
       <div className="resume-preview-container">
-        <h1 className="name">{resumeData.fullName || "Your Name"}</h1>
-        <p className="title">{resumeData.professional_title || "Your Title"}</p>
-
-        <p className="contact">
-          {resumeData.email} | {resumeData.phone} | {resumeData.address}
-        </p>
-        <p className="contact">{resumeData.linkedin}</p>
-        <p className="contact">{resumeData.portfolio}</p>
+        <div className="header-section">
+          <h1>{resumeData.fullName || "Your Name"}</h1>
+          <p>{resumeData.phone} | {resumeData.email} | {resumeData.address}</p>
+        </div>
 
         {resumeData.profile_summary && (
           <section>
-            <h2>Profile Summary</h2>
-            <p dangerouslySetInnerHTML={createMarkup(resumeData.profile_summary)}></p>
+            <div className="section-title">EXECUTIVE SUMMARY</div>
+            <p className="text-justify" dangerouslySetInnerHTML={createMarkup(resumeData.profile_summary)}></p>
           </section>
         )}
 
         {resumeData.key_skills && resumeData.key_skills.trim() !== "" && (
           <section>
-            <h2>Key Skills</h2>
+            <div className="section-title">KEY SKILLS</div>
             {renderList(resumeData.key_skills.split(","))}
           </section>
         )}
 
         {resumeData.work_experience && resumeData.work_experience.length > 0 && (
           <section>
-            <h2>Work Experience</h2>
+            <div className="section-title">EXPERIENCE</div>
             {renderList(resumeData.work_experience)}
           </section>
         )}
 
-        {resumeData.education && resumeData.education.length > 0 && (
+        {(resumeData.certifications?.length > 0 || resumeData.projects?.length > 0) && (
           <section>
-            <h2>Education</h2>
-            {renderList(resumeData.education)}
-          </section>
-        )}
-
-        {resumeData.certifications && resumeData.certifications.length > 0 && (
-          <section>
-            <h2>Certifications</h2>
-            {renderList(resumeData.certifications)}
-          </section>
-        )}
-
-        {resumeData.projects && resumeData.projects.length > 0 && (
-          <section>
-            <h2>Projects</h2>
-            {renderList(resumeData.projects)}
-          </section>
-        )}
-
-        {resumeData.research_publications && resumeData.research_publications.length > 0 && (
-          <section>
-            <h2>Research Publications</h2>
-            {renderList(resumeData.research_publications)}
-          </section>
-        )}
-
-        {resumeData.awards && resumeData.awards.length > 0 && (
-          <section>
-            <h2>Awards</h2>
-            {renderList(resumeData.awards)}
-          </section>
-        )}
-
-        {resumeData.professional_membership && resumeData.professional_membership.length > 0 && (
-          <section>
-            <h2>Professional Memberships</h2>
-            {renderList(resumeData.professional_membership)}
+            <div className="section-title">MISC INFORMATION</div>
+            {renderList(resumeData.certifications || [])}
+            {renderList(resumeData.projects || [])}
           </section>
         )}
       </div>
