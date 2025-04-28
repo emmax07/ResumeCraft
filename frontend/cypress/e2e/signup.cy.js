@@ -11,4 +11,9 @@ describe('Signup Page', () => {
       cy.url().should('include', '/login');
     });
   });
+  beforeEach(() => {
+    // Clear localStorage/sessionStorage before each test
+    cy.clearLocalStorage();
+    cy.clearCookies();
+  });
   

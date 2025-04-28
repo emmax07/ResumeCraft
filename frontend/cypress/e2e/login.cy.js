@@ -10,4 +10,9 @@ describe('Login Page', () => {
       cy.url().should('include', '/resume_templates');
     });
   });
+  beforeEach(() => {
+    // Clear localStorage/sessionStorage before each test
+    cy.clearLocalStorage();
+    cy.clearCookies();
+  });
   
