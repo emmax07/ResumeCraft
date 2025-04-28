@@ -91,18 +91,20 @@ const Resume = () => {
 
             {/* Work Experience */}
             <div>
-              {formData.work_experience.length > 0 && <h3>Work Experience</h3>}
+              {formData.work_experience.length > 0 && <h3>Work Experience</h3>}{" "}
               {formData.work_experience.map((experience, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`workExperience-${index}`}
-                    value={experience}
-                    onChange={(e) =>
-                      handleArrayChange(e, index, "work_experience")
-                    }
-                    placeholder={`Work Experience ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`workExperience-${index}`}
+                      value={experience}
+                      onChange={(e) =>
+                        handleArrayChange(e, index, "work_experience")
+                      }
+                      placeholder={`Work Experience ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() =>
@@ -123,16 +125,18 @@ const Resume = () => {
 
             {/* Education */}
             <div>
-              {formData.education.length > 0 && <h3>Education</h3>}
+              {formData.education.length > 0 && <h3>Education</h3>}{" "}
               {formData.education.map((education, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Education-${index}`}
-                    value={education}
-                    onChange={(e) => handleArrayChange(e, index, "education")}
-                    placeholder={`Education ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Education-${index}`}
+                      value={education}
+                      onChange={(e) => handleArrayChange(e, index, "education")}
+                      placeholder={`Education ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() => handleRemoveArrayItem(index, "education")}
@@ -151,18 +155,20 @@ const Resume = () => {
 
             {/* Certifications */}
             <div>
-              {formData.certifications.length > 0 && <h3>Certifications</h3>}
+              {formData.certifications.length > 0 && <h3>Certifications</h3>}{" "}
               {formData.certifications.map((certification, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Certifications-${index}`}
-                    value={certification}
-                    onChange={(e) =>
-                      handleArrayChange(e, index, "certifications")
-                    }
-                    placeholder={`Certifications ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Certifications-${index}`}
+                      value={certification}
+                      onChange={(e) =>
+                        handleArrayChange(e, index, "certifications")
+                      }
+                      placeholder={`Certifications ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() =>
@@ -183,16 +189,18 @@ const Resume = () => {
 
             {/* Projects */}
             <div>
-              {formData.projects.length > 0 && <h3>Projects</h3>}
+              {formData.projects.length > 0 && <h3>Projects</h3>}{" "}
               {formData.projects.map((project, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Projects-${index}`}
-                    value={project}
-                    onChange={(e) => handleArrayChange(e, index, "projects")}
-                    placeholder={`Projects ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Projects-${index}`}
+                      value={project}
+                      onChange={(e) => handleArrayChange(e, index, "projects")}
+                      placeholder={`Projects ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() => handleRemoveArrayItem(index, "projects")}
@@ -213,18 +221,20 @@ const Resume = () => {
             <div>
               {formData.research_publications.length > 0 && (
                 <h3>Research Publications</h3>
-              )}
+              )}{" "}
               {formData.research_publications.map((publication, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Research Publications-${index}`}
-                    value={publication}
-                    onChange={(e) =>
-                      handleArrayChange(e, index, "research_publications")
-                    }
-                    placeholder={`Research Publications ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Research Publications-${index}`}
+                      value={publication}
+                      onChange={(e) =>
+                        handleArrayChange(e, index, "research_publications")
+                      }
+                      placeholder={`Research Publications ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() =>
@@ -245,16 +255,18 @@ const Resume = () => {
 
             {/* Awards */}
             <div>
-              {formData.awards.length > 0 && <h3>Awards</h3>}
+              {formData.awards.length > 0 && <h3>Awards</h3>}{" "}
               {formData.awards.map((award, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Awards-${index}`}
-                    value={award}
-                    onChange={(e) => handleArrayChange(e, index, "awards")}
-                    placeholder={`Awards ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Awards-${index}`}
+                      value={award}
+                      onChange={(e) => handleArrayChange(e, index, "awards")}
+                      placeholder={`Awards ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() => handleRemoveArrayItem(index, "awards")}
@@ -275,18 +287,20 @@ const Resume = () => {
             <div>
               {formData.professional_membership.length > 0 && (
                 <h3>Professional Membership</h3>
-              )}
+              )}{" "}
               {formData.professional_membership.map((membership, index) => (
                 <div key={index}>
-                  <textarea
-                    className="data-input"
-                    name={`Professional Membership-${index}`}
-                    value={membership}
-                    onChange={(e) =>
-                      handleArrayChange(e, index, "professional_membership")
-                    }
-                    placeholder={`Professional Membership ${index + 1}`}
-                  />
+                  <p>
+                    <textarea
+                      className="data-input"
+                      name={`Professional Membership-${index}`}
+                      value={membership}
+                      onChange={(e) =>
+                        handleArrayChange(e, index, "professional_membership")
+                      }
+                      placeholder={`Professional Membership ${index + 1}`}
+                    />
+                  </p>
                   <button
                     type="button"
                     onClick={() =>

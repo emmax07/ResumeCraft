@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import ResumePreview1 from "./ResumePreview1";
 import ResumePreview2 from "./ResumePreview2";
 import ResumePreview3 from "./ResumePreview3";
-import ResumePreview4 from "./ResumePreview1";
-import ResumePreview5 from "./ResumePreview2";
-import ResumePreview6 from "./ResumePreview3";
+import ResumePreview4 from "./ResumePreview4";
+import ResumePreview5 from "./ResumePreview5";
+import ResumePreview6 from "./ResumePreview6";
 
 const ResumePreview = () => {
   const { id } = useParams(); // Extract the dynamic 'id' from the URL

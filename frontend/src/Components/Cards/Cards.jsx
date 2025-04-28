@@ -3,10 +3,10 @@ import "./Cards.css";
 import Navbar from "../Navbar/Navbar";
 import resume_image1 from "../Assets/Resume1.png";
 import resume_image2 from "../Assets/Resume2.png";
-import resume_image3 from "../Assets/Resume1.png";
-import resume_image4 from "../Assets/Resume1.png";
-import resume_image5 from "../Assets/Resume1.png";
-import resume_image6 from "../Assets/Resume1.png";
+import resume_image3 from "../Assets/Resume3.png";
+import resume_image4 from "../Assets/Resume4.png";
+import resume_image5 from "../Assets/Resume5.png";
+import resume_image6 from "../Assets/Resume6.png";
 
 const cardData = [
   { id: 1, image: resume_image1 },
