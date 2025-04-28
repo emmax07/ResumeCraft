@@ -1,3 +1,5 @@
+<reference types ="cypress" />
+
 describe('Full User Journey Test: Signup, Login, Resume Creation, Logout', () => {
     it('should signup, login, fill resume, preview, download, and logout successfully', () => {
       const timestamp = Date.now();
