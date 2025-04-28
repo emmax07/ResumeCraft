@@ -53,7 +53,7 @@ const Navbar = () => {
     <nav>
       <ul>
         <li className="home-button">
-          <Link to="/">💼 ResumeCraft</Link>
+          <Link to="/">💼 ResumeCrafts</Link>
         </li>
       </ul>
 

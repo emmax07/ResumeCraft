@@ -3,6 +3,7 @@ import ResumePDFGenerator from "./ResumePDFGenerator";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import PropTypes from "prop-types";
+import "./ResumePreview1.css";
 
 const ResumePreview1 = ({ userEmail }) => {
   const location = useLocation();
@@ -69,99 +70,194 @@ const ResumePreview1 = ({ userEmail }) => {
   return (
     <div>
       <Navbar />
-      <div id="resume" className="resume-view-container">
-        <h1>{resumeData.fullName || "N/A"}</h1>
-        <p>
-          <strong>Address:</strong> {resumeData.address || "N/A"}
-        </p>
-        <p>
-          {resumeData.email || "N/A"}, {resumeData.phone || "N/A"},{" "}
-          {resumeData.linkedin || "N/A"}
-        </p>
-        <p>
-          <strong>Profile Summary:</strong> {resumeData.profileSummary || "N/A"}
-        </p>
-        <p>
-          <strong>Key Skills:</strong> {resumeData.key_skills || "N/A"}
-        </p>
 
-        {/* Sections Rendering */}
-        {resumeData.work_experience?.length > 0 && (
-          <div className="content-container">
-            <strong>Work Experience:</strong>
-            {resumeData.work_experience.map((experience, index) => (
-              <p className="new_para" key={index}>
-                {experience}
-              </p>
-            ))}
-          </div>
-        )}
+      <div id="resume" className="resume-preview1-container">
+        <div className="resume-preview1-header">
+          <h1>{resumeData.fullName || "YOUR NAME"}</h1>
+        </div>
 
-        {resumeData.education?.length > 0 && (
-          <div className="content-container">
-            <strong>Education:</strong>
-            {resumeData.education.map((education, index) => (
-              <p className="new_para" key={index}>
-                {education}
-              </p>
-            ))}
-          </div>
-        )}
+        <div className="resume-preview1-main-content">
+          {/* Left Column */}
+          <div className="resume-preview1-left-column">
+            {/* CONTACT */}
+            <div className="resume-preview1-section contact-section">
+              <h3>CONTACT</h3>
+              <ul>
+                <li>
+                  <strong>Email:</strong> {resumeData.email}
+                </li>
+                <li>
+                  <strong>Phone:</strong> {resumeData.phone}
+                </li>
+                <li>
+                  <strong>Address:</strong> {resumeData.address}
+                </li>
+                <li>
+                  <strong>LinkedIn:</strong>{" "}
+                  <a
+                    href={`https://${resumeData.linkedin}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {resumeData.linkedin}
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-        {resumeData.certifications?.length > 0 && (
-          <div className="content-container">
-            <strong>Certifications:</strong>
-            {resumeData.certifications.map((certification, index) => (
-              <p className="new_para" key={index}>
-                {certification}
-              </p>
-            ))}
-          </div>
-        )}
+            {/* EDUCATION */}
+            {Array.isArray(resumeData.education) &&
+              resumeData.education.length > 0 && (
+                <div className="resume-preview1-section">
+                  <h3>EDUCATION</h3>
+                  {resumeData.education.map((edu, index) => {
+                    const parts = edu
+                      .split("\n")
+                      .map((line) => line.trim())
+                      .filter(Boolean);
+                    return (
+                      <div key={index} style={{ marginBottom: "16px" }}>
+                        <p>
+                          <strong>{parts[0]}</strong>
+                        </p>
+                        <p>{parts[1]}</p>
+                        <p>
+                          {parts[2]} {parts[3] ? `– ${parts[3]}` : ""}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
-        {resumeData.projects?.length > 0 && (
-          <div className="content-container">
-            <strong>Projects:</strong>
-            {resumeData.projects.map((project, index) => (
-              <p className="new_para" key={index}>
-                {project}
-              </p>
-            ))}
+            {/* SKILLS */}
+            {resumeData.key_skills?.trim() && (
+              <div className="section">
+                <h3>SKILLS</h3>
+                <p>{resumeData.key_skills}</p>
+              </div>
+            )}
           </div>
-        )}
 
-        {resumeData.research_publications?.length > 0 && (
-          <div className="content-container">
-            <strong>Research Publications:</strong>
-            {resumeData.research_publications.map((publication, index) => (
-              <p className="new_para" key={index}>
-                {publication}
-              </p>
-            ))}
-          </div>
-        )}
+          {/* Right Column */}
+          <div className="resume-preview1-right-column">
+            {/* PROFILE SUMMARY */}
+            {resumeData.profile_summary?.trim() && (
+              <div className="resume-preview1-section-Profile">
+                <h3>PROFILE SUMMARY</h3>
+                <p>{resumeData.profile_summary}</p>
+              </div>
+            )}
 
-        {resumeData.awards?.length > 0 && (
-          <div className="content-container">
-            <strong>Awards:</strong>
-            {resumeData.awards.map((award, index) => (
-              <p className="new_para" key={index}>
-                {award}
-              </p>
-            ))}
-          </div>
-        )}
+            {/* PROJECTS */}
+            {Array.isArray(resumeData.projects) &&
+              resumeData.projects.length > 0 && (
+                <div className="resume-preview1-section">
+                  <h3>PROJECTS</h3>
+                  {resumeData.projects.map((proj, index) => {
+                    const lines = proj
+                      .split("\n")
+                      .filter((line) => line.trim());
+                    const title = lines[0] || "";
+                    const details = lines.slice(1);
+                    return (
+                      <div
+                        key={index}
+                        className="resume-preview1-project-entry"
+                      >
+                        <p>
+                          <strong>{title}</strong>
+                        </p>
+                        {details.map((detail, i) => (
+                          <p key={i}>{detail}</p>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
-        {resumeData.professional_membership?.length > 0 && (
-          <div className="content-container">
-            <strong>Professional Membership:</strong>
-            {resumeData.professional_membership.map((membership, index) => (
-              <p className="new_para" key={index}>
-                {membership}
-              </p>
-            ))}
+            {/* WORK EXPERIENCE */}
+            {Array.isArray(resumeData.work_experience) &&
+              resumeData.work_experience.length > 0 && (
+                <div className="resume-preview1-section">
+                  <h3>WORK EXPERIENCE</h3>
+                  {resumeData.work_experience.map((experience, index) => {
+                    const lines = experience
+                      .split("\n")
+                      .filter((line) => line.trim());
+                    const dateRange = lines[0] || "";
+                    const jobTitle = lines[1] || "";
+                    const companyLocation = lines[2] || "";
+                    const details = lines.slice(3);
+                    return (
+                      <div
+                        key={index}
+                        className="resume-preview1-experience-entry"
+                      >
+                        <p>
+                          <strong>{dateRange}</strong>
+                        </p>
+                        <p>
+                          <strong>{jobTitle}</strong>
+                        </p>
+                        <p>{companyLocation}</p>
+                        {details.map((detail, i) => (
+                          <p key={i}>{detail}</p>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+            {/* CERTIFICATIONS */}
+            {Array.isArray(resumeData.certifications) &&
+              resumeData.certifications.some((item) => item.trim()) && (
+                <div className="resume-preview1-section">
+                  <h3>CERTIFICATIONS</h3>
+                  {resumeData.certifications.map(
+                    (cert, index) => cert.trim() && <p key={index}>{cert}</p>
+                  )}
+                </div>
+              )}
+
+            {/* RESEARCH PUBLICATIONS */}
+            {Array.isArray(resumeData.research_publications) &&
+              resumeData.research_publications.some((item) => item.trim()) && (
+                <div className="resume-preview1-section">
+                  <h3>RESEARCH PUBLICATIONS</h3>
+                  {resumeData.research_publications.map(
+                    (pub, index) => pub.trim() && <p key={index}>{pub}</p>
+                  )}
+                </div>
+              )}
+
+            {/* AWARDS */}
+            {Array.isArray(resumeData.awards) &&
+              resumeData.awards.some((item) => item.trim()) && (
+                <div className="resume-preview1-section">
+                  <h3>AWARDS</h3>
+                  {resumeData.awards.map(
+                    (award, index) => award.trim() && <p key={index}>{award}</p>
+                  )}
+                </div>
+              )}
+
+            {/* PROFESSIONAL MEMBERSHIP */}
+            {Array.isArray(resumeData.professional_membership) &&
+              resumeData.professional_membership.some((item) =>
+                item.trim()
+              ) && (
+                <div className="resume-preview1-section">
+                  <h3>PROFESSIONAL MEMBERSHIP</h3>
+                  {resumeData.professional_membership.map(
+                    (mem, index) => mem.trim() && <p key={index}>{mem}</p>
+                  )}
+                </div>
+              )}
           </div>
-        )}
+        </div>
       </div>
 
       <div className="resume-button-group">
@@ -179,8 +275,8 @@ const ResumePreview1 = ({ userEmail }) => {
   );
 };
 
-export default ResumePreview1;
-
 ResumePreview1.propTypes = {
   userEmail: PropTypes.string,
 };
+
+export default ResumePreview1;
