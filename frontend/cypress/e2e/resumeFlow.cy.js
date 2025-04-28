@@ -1,5 +1,7 @@
 describe('Full User Journey Test: Signup, Login, Resume Creation, Logout', () => {
     it('should signup, login, fill resume, preview, download, and logout successfully', () => {
+      const timestamp = Date.now();
+      const randomUsername = `user${timestamp}`;
       const randomEmail = `user${Date.now()}@example.com`;
       const password = 'password123';
   
@@ -7,7 +9,7 @@ describe('Full User Journey Test: Signup, Login, Resume Creation, Logout', () =>
       cy.visit('http://localhost:5173/signup');
   
       // Fill signup form
-      cy.get('input[placeholder="Username"]').type('testuser');
+      cy.get('input[placeholder="Username"]').type(randomUsername);
       cy.get('input[placeholder="Email"]').type(randomEmail);
       cy.get('input[placeholder="Password"]').type(password);
       cy.get('button').contains('Sign Up').click();
@@ -20,11 +22,18 @@ describe('Full User Journey Test: Signup, Login, Resume Creation, Logout', () =>
       cy.get('input[placeholder="Password"]').type(password);
       cy.get('button').contains('Login').click();
   
-      // 3. After login, should be at templates page
+      // 3. After login, should be at userDashboard then templates page
+      // Check if landed on users dashboard
+      cy.url().should('include', '/users_dashboard');
+
+      // Click on Resume Templates button or link
+      cy.contains('Resume Templates').click();
+
+      // Now check if moved to resume templates page
       cy.url().should('include', '/resume_templates');
-  
-      // Select a Template
-      cy.contains('Template 1').click();
+
+      // Then continue selecting Template 1
+      cy.contains('Resume 1').click();
   
       // 4. Fill Resume Form
       cy.get('input[name="fullName"]').type('John Doe');
