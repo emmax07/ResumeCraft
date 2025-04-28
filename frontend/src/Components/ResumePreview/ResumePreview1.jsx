@@ -70,7 +70,6 @@ const ResumePreview1 = ({ userEmail }) => {
   return (
     <div>
       <Navbar />
-
       <div id="resume" className="resume-preview1-container">
         <div className="resume-preview1-header">
           <h1>{resumeData.fullName || "YOUR NAME"}</h1>

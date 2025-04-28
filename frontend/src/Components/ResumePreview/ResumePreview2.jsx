@@ -221,6 +221,7 @@ const ResumePreview2 = ({ userEmail }) => {
   );
 };
 
+
 ResumePreview2.propTypes = {
   userEmail: PropTypes.string,
 };

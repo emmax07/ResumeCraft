@@ -198,6 +198,7 @@ const ResumePreview3 = ({ userEmail }) => {
   );
 };
 
+
 export default ResumePreview3;
 
 ResumePreview3.propTypes = {
